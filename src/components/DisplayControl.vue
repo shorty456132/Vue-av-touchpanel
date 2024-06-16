@@ -16,6 +16,7 @@
 
 <script>
 import { ref } from 'vue';
+import SocketService from '@/services/socketService';
 
 export default {
   name: 'DisplayControl',
@@ -26,8 +27,10 @@ export default {
     const toggleDisplay = (display) => {
       if (display === 'left') {
         leftDisplay.value = !leftDisplay.value;
+        SocketService.sendEvent('toggleDisplay', { display: 'left', state: leftDisplay.value });
       } else if (display === 'right') {
         rightDisplay.value = !rightDisplay.value;
+        SocketService.sendEvent('toggleDisplay', { display: 'right', state: rightDisplay.value });
       }
     };
 

@@ -32,6 +32,7 @@
 
 <script>
 import { ref } from 'vue';
+import SocketService from '@/services/socketService';
 
 export default {
   name: 'CameraControl',
@@ -41,20 +42,22 @@ export default {
 
     const selectCamera = (camera) => {
       selectedCamera.value = camera;
+      SocketService.sendEvent('cameraSelect', camera);
     };
 
     const togglePrivacy = () => {
       privacyMode.value = !privacyMode.value;
+      SocketService.sendEvent('togglePrivacy', privacyMode.value);
     };
 
     const moveCamera = (direction) => {
       console.log(`Moving camera: ${direction}`);
-      // Add logic to move the camera
+      SocketService.sendEvent('moveCamera', direction);
     };
 
     const applyPreset = (preset) => {
       console.log(`Applying preset: ${preset}`);
-      // Add logic to apply the preset
+      SocketService.sendEvent('applyPreset', preset);
     };
 
     return {

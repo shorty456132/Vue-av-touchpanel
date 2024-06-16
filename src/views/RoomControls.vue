@@ -33,6 +33,7 @@ import LightingControl from '@/components/LightingControl.vue';
 import DisplayControl from '@/components/DisplayControl.vue';
 
 export default {
+  name: 'RoomControls',
   setup() {
     const activeTab = ref('camera');
 
@@ -76,9 +77,9 @@ export default {
 }
 
 .sidebar-title {
-  font-size: 24px;
+  margin: 0 0 20px;
+  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 20px;
 }
 
 .sidebar ul {
