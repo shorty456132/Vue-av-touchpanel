@@ -92,7 +92,7 @@ export default {
 }
 
 .lighting-levels, .lighting-presets {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 input[type="range"] {

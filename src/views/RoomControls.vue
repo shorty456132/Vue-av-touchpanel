@@ -78,7 +78,7 @@ export default {
 
 .sidebar-title {
   margin: 0 0 20px;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: bold;
 }
 
