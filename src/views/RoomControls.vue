@@ -31,6 +31,7 @@ import { ref, computed } from 'vue';
 import CameraControl from '@/components/CameraControl.vue';
 import LightingControl from '@/components/LightingControl.vue';
 import DisplayControl from '@/components/DisplayControl.vue';
+import AudioControl from '@/components/AudioControl.vue';
 
 export default {
   name: 'RoomControls',
@@ -41,6 +42,8 @@ export default {
       switch (activeTab.value) {
         case 'camera':
           return CameraControl;
+        case 'audio':
+          return AudioControl;
         case 'lighting':
           return LightingControl;
         case 'displays':

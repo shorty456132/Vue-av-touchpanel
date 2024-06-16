@@ -1,27 +1,24 @@
 <template>
   <div>
-    <h2>Lighting</h2>
+    <h2>Audio</h2>
     <div class="control-section">
       <div class="lighting-levels">
-        <span>Lighting Levels</span>
-        <div class="sliders">
-          <div class="slider">
-            <label>Perimeter</label>
-            <input type="range" min="0" max="100" v-model="perimeterLevel" />
-          </div>
-          <div class="slider">
-            <label>Front Wall</label>
-            <input type="range" min="0" max="100" v-model="frontWallLevel" />
-          </div>
-          <div class="slider">
-            <label>Table</label>
-            <input type="range" min="0" max="100" v-model="tableLevel" />
-            <!-- @input="updateLighting('Table', tableLevel)"  -->
-          </div>
-          <div class="slider">
-            <label>Master</label>
-            <input type="range" min="0" max="100" v-model="masterLevel" />
-          </div>
+        <span>Audio Levels</span>
+        <div>
+          <label>Perimeter</label>
+          <input type="range" min="0" max="100" v-model="perimeterLevel" @input="updateLighting('Perimeter', perimeterLevel)" />
+        </div>
+        <div>
+          <label>Front Wall</label>
+          <input type="range" min="0" max="100" v-model="frontWallLevel" @input="updateLighting('FrontWall', frontWallLevel)" />
+        </div>
+        <div>
+          <label>Table</label>
+          <input type="range" min="0" max="100" v-model="tableLevel" @input="updateLighting('Table', tableLevel)" />
+        </div>
+        <div>
+          <label>Master</label>
+          <input type="range" min="0" max="100" v-model="masterLevel" @input="updateLighting('Master', masterLevel)" />
         </div>
       </div>
       <div class="lighting-presets">
@@ -36,7 +33,7 @@
 
 <script>
 import { ref } from 'vue';
-// import SocketService from '@/services/socketService';
+import SocketService from '@/services/socketService';
 
 export default {
   name: 'LightingControl',
@@ -46,9 +43,9 @@ export default {
     const tableLevel = ref(50);
     const masterLevel = ref(50);
 
-    // const updateLighting = (zone, level) => {
-    //   // SocketService.sendEvent('updateLighting', { zone, level });
-    // };
+    const updateLighting = (zone, level) => {
+      SocketService.sendEvent('updateLighting', { zone, level });
+    };
 
     const setPreset = (preset) => {
       switch (preset) {
@@ -71,10 +68,10 @@ export default {
           masterLevel.value = 25;
           break;
       }
-      // updateLighting('Perimeter', perimeterLevel.value);
-      // updateLighting('FrontWall', frontWallLevel.value);
-      // updateLighting('Table', tableLevel.value);
-      // updateLighting('Master', masterLevel.value);
+      updateLighting('Perimeter', perimeterLevel.value);
+      updateLighting('FrontWall', frontWallLevel.value);
+      updateLighting('Table', tableLevel.value);
+      updateLighting('Master', masterLevel.value);
     };
 
     return {
@@ -82,7 +79,7 @@ export default {
       frontWallLevel,
       tableLevel,
       masterLevel,
-      // updateLighting,
+      updateLighting,
       setPreset,
     };
   },
@@ -96,16 +93,6 @@ export default {
 
 .lighting-levels, .lighting-presets {
   margin-bottom: 50px;
-}
-
-.sliders {
-  display: flex;
-  flex-direction: column;
-  max-width: 480px;
-}
-
-.slider {
-  margin-bottom: 10px;
 }
 
 input[type="range"] {
